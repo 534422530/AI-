@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 老四01屏幕读取
 
 老四AI助手的屏幕读取技能包。
@@ -59,7 +58,3 @@ pip install pillow requests numpy
 ## 版本
 
 v1.0.0 - 初始版本
-=======
-# AI-
-opencode成精了 都自己开发了
->>>>>>> d896ec6973354dcb985ee00d9a1a7fb0a3a79579
