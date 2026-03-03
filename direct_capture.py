@@ -145,12 +145,32 @@ def monitor_changes(interval=1, callback=None):
         time.sleep(interval)
 
 
-if __name__ == "__main__":
-    """
-    测试直接读取显存
-    """
-    print("读取显存数据...")
+def save_screen(path="screen_direct.png"):
+    """保存屏幕截图"""
     pixels, w, h = get_screen_data()
-    print(f"分辨率: {w}x{h}")
-    print(f"数据大小: {pixels.nbytes/1024/1024:.1f}MB")
-    print(f"像素哈希: {get_pixel_hash(pixels)}")
+    from PIL import Image
+    img = Image.fromarray(pixels)
+    img.save(path)
+    return path
+
+def analyze_screen():
+    """分析屏幕内容"""
+    from PIL import Image
+    import io
+    
+    pixels, w, h = get_screen_data()
+    img = Image.fromarray(pixels)
+    
+    # 保存
+    path = save_screen("screen_direct.png")
+    print(f"已保存: {path}")
+    
+    # 简单分析
+    avg_color = pixels.mean(axis=(0,1))
+    print(f"平均颜色 RGB: ({avg_color[0]:.0f}, {avg_color[1]:.0f}, {avg_color[2]:.0f})")
+    
+    # 检测是否是视频播放（检测画面变化程度）
+    return pixels, w, h
+
+if __name__ == "__main__":
+    analyze_screen()
